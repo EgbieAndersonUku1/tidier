@@ -44,7 +44,7 @@ Program information
  the file or the files in that sub-directories based on the creation
  date.
 
- Program usage
+ Program usages
 
  -d directory path
 
