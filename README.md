@@ -8,7 +8,7 @@ What do I mean this ?
 
 Well we are constantly downloading, creating and adding new files to our
 directories in an unorder manner. Before we know it our directories has
-become a cesspool of files where we can no longer make head or tails and less
+become a cesspool of files where we can no longer make head or tails and lets
 not mention searching for files.
 
 What this program does is tidies your directory or reclusive tidies your
