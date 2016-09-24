@@ -36,3 +36,24 @@ Now for each file it finds it would run the four steps above if the folder does 
 the four steps above will be negeated and the file would be move to that folder instead.
 
 Now you have the files in sort order based on the year and date their were created.
+
+
+Program information
+ ===================
+ The program takes a directory and tidies or reclusive tidies
+ the file or the files in that sub-directories based on the creation
+ date.
+
+ Program usage
+ =============
+
+ -d <directory path>
+
+ optional arguments
+ ===================
+
+ -r reclusive tidies a directory and all sub-directories within it
+ -e Takes a list of directories all separted with commas or a single directory
+    and excludes from the cleanup list.
+    e.g.
+    dir/path1, dir/path2, dir/path3
