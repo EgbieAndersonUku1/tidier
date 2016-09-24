@@ -45,8 +45,8 @@ Program information
  date.
 
  Program usage
- 
- -d <directory path>
+
+ -d directory path
 
  optional arguments
 
