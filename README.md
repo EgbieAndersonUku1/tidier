@@ -16,7 +16,7 @@ directory if that option is selected by sorting the files into
 folders based on the year, date and the file extenstion their were created.
 
 For example if you have a file in your computer that was created on the
-10th march 2014 and the file is a PDF file located on the Desktop.
+10th march 2014 and the file for example was a PDF file located on the Desktop.
 Then the program would create the folder named 2014 the year the file was created
  and within that folder it would created 10_march_2014 the date the file was created
  and finally it would create another folder called pdf_files the extenstion used for the file.
