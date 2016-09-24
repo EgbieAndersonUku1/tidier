@@ -23,7 +23,9 @@ For example if you have a file in your computer that was created on the
 Then the program would perform several steps
 
 1) Create the folder named 2014 the year the file was created.
+
 2) Within that folder it would created the month folder the month the folder was created. In this caseis March.
+
 3) Within the month( March in this case) folder it would create another folder the date the folder was
    created which in this case is the 10_march_2014.
 
