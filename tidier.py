@@ -25,6 +25,9 @@
 #  Finally it would move the file to that folder and viola no more untidy files.
 #
 # Now you have files in sort order based on the year and date their were created
+#
+# DOES NOT WORK IN WINDOWS BECAUSE WINDOWS USES CPICKLE AND LINUX USES DLL
+
 ###############################################################################
 
 from os import listdir, chdir, getcwd, mkdir

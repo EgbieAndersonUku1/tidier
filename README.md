@@ -1,6 +1,8 @@
 NAME          : Tidier
 Author        : Egbie Uku
 
+DOES NOT WORK IN WINDOWS BECAUSE WINDOWS USES CPICKLE AND THIS ONE USES DLL
+
 Description
 ============
 
