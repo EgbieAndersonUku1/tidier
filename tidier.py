@@ -207,7 +207,8 @@ class Tidier(object):
                     chdir(date)
                 except OSError:
                     print('[-] Sufficient permission to access file')
-                self._process_file(getcwd(), f, dir_name_path)
+                else:
+                    self._process_file(getcwd(), f, dir_name_path)
         else:
             file_errors.append(f)
 
