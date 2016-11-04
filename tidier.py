@@ -6,7 +6,7 @@
 #
 #  Description
 #  The more we use our computers the messy our directories become.
-#  What do I by mean this.
+#  What do I by mean this...
 #
 #  Well we are constantly downloading, creating and adding new files to our
 #  directories in an unorder manner. Before we know it our directories has
