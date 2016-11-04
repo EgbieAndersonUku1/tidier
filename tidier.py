@@ -44,16 +44,16 @@ class Tidier(object):
     params path        : The path containing the files
     params exclude_dirs: The path to directories to exclude.from tidying
     """
-    def __init__(self, path, exclude_dirs={}):
+    def __init__(self, path, excluded_dirs):
 
         if not exists(path):
             return '[-] Directory does not exists !!!'
 
-        self.path  =  path[:-1] if (path.endswith('/') or path.endswith('\\')) else path
+        self.path  =  path[:-1] if (path.endswith('/') or path.endswith('//')) else path # remove back slash for the URL if exists
         self.exclude_dirs = {}
-        for f in exclude_dirs:
+        for f in excluded_dirs: #
             if f:
-                if f.endswith('/'):
+                if f.endswith('/') or f.endswith('//'):
                     self.exclude_dirs[str(f[:-1])] = True
                 else:
                     self.exclude_dirs[str(f)] = True
@@ -146,7 +146,7 @@ class Tidier(object):
         else:
             try:
                 mkdir(dir_name_path)
-            except OSError:
+            except:
                 print('[-] Insufficient permission to create directory in specific location')
             else:
                 chdir(dir_name_path)
@@ -207,7 +207,8 @@ class Tidier(object):
                     chdir(date)
                 except OSError:
                     print('[-] Sufficient permission to access file')
-                self._process_file(getcwd(), f, dir_name_path)
+                else:
+                    self._process_file(getcwd(), f, dir_name_path)
         else:
             file_errors.append(f)
 
@@ -236,7 +237,7 @@ def run(tidier_obj, recursive=False):
                 p.map(tidier_obj.categorise_files, t, chunksize=5)
                 p.close()
                 p.join()
-                print('[+] Done the files have been tidier.')
+                print('[+] Done the files have been tidied.')
 
     if not recursive:
         print('[+] Performing tidy in chosen directory please wait....')
@@ -247,7 +248,7 @@ def run(tidier_obj, recursive=False):
 
 def main():
     parser = OptionParser('usage % -d <directory to tidy>, optional -r <when added reclusive tidies that directory>')
-    parser.add_option('-e', '--exclude_dirs', dest='excluded_dirs', help='Takes a string of directories each separated with commas e.g./home/path_to_some_directory, /home/path_to_dir2. Exclude all files in this path')
+    parser.add_option('-e', '--exclude_dirs', dest='excluded_dirs', type=str, help='Takes a string of directories each separated with commas e.g./home/path_to_some_directory, /home/path_to_dir2. Exclude all files in this path')
     parser.add_option('-d', '--directory_path', dest='directory', help='The directory to tidy' )
     parser.add_option('-r', '--recursive', action='store_true', dest='recursive_tidy', default=False,
                            help='when use with -d command recursive tidies all directories and sub-directories in that folder' )
@@ -255,12 +256,12 @@ def main():
     (options, args) = parser.parse_args()
     if options.excluded_dirs:
         dirs_to_exclude = options.excluded_dirs.split(',')
-
+	
     if options.directory and exists(options.directory):
         if not options.recursive_tidy and not options.excluded_dirs:
             run(Tidier(options.directory))
         elif not options.recursive_tidy and options.excluded_dirs:
-            print('[+] A total of {} will not be excluded in the clean up'.format(len(dirs_to_exclude)))
+            print('[+] A total of {} will be excluded in the clean up'.format(len(dirs_to_exclude)))
             run(Tidier(options.directory, dirs_to_exclude))
         elif options.recursive_tidy and not options.excluded_dirs:
             run(Tidier(options.directory), True)
@@ -285,11 +286,13 @@ def main():
                  ===================
 
                  -r reclusive tidies a directory and all sub-directories within it
-                 -e Takes a list of directories all separted with commas or a single directory
-                    and excludes from the cleanup list.
-
+                 -e Takes a string of directories all separted with commas or a single directory
+                    and excludes them from the cleanup list. Enter either ' or " at the start of
+                    the string and at the end of the string. Otherwise only the first directory would be
+                    excluded.
+		    
                     e.g.
-                    dir/path1, dir/path2, dir/path3
+                    'dir/path1, dir/path2, dir/path3' or "dir/path1, dir/path2, dir/path3"
               '''
         print(parser.usage)
 
