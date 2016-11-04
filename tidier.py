@@ -6,7 +6,7 @@
 #
 #  Description
 #  The more we use our computers the messy our directories become.
-#  What do I mean this
+#  What do I by mean this.
 #
 #  Well we are constantly downloading, creating and adding new files to our
 #  directories in an unorder manner. Before we know it our directories has
@@ -14,7 +14,7 @@
 #  not mention searching for files.
 
 #  What this program does is tidies your directory or reclusive tidies your
-#  directory if that option is selected by sorting the files into
+#  directory if that option is selected by sorting your files into
 #  folders based on the year, date and the file extenstion their were created.
 #
 #  For example if you have a file in your computer that was created on the
@@ -24,7 +24,7 @@
 #   and finally it would create another folder called pdf_files the extenstion used for the file.
 #  Finally it would move the file to that folder and viola no more untidy files.
 #
-# Now you have files in sort order based on the year and date their were created
+# Now you have files in sorted order based on the year and date their were created
 #
 # DOES NOT WORK IN WINDOWS BECAUSE WINDOWS USES CPICKLE AND LINUX USES DLL
 
@@ -253,20 +253,26 @@ def main():
     parser.add_option('-r', '--recursive', action='store_true', dest='recursive_tidy', default=False,
                            help='when use with -d command recursive tidies all directories and sub-directories in that folder' )
 
+   
     (options, args) = parser.parse_args()
     if options.excluded_dirs:
         dirs_to_exclude = options.excluded_dirs.split(',')
 	
-    if options.directory and exists(options.directory):
+    if options.directory:
+        if options.directory == '.': # if the user enters '.' meaning current directory
+          options.directory = getcwd()
+        else:
+          if not exists(options.directory):
+             parser.usage
         if not options.recursive_tidy and not options.excluded_dirs:
-            run(Tidier(options.directory))
+             run(Tidier(options.directory))
         elif not options.recursive_tidy and options.excluded_dirs:
-            print('[+] A total of {} will be excluded in the clean up'.format(len(dirs_to_exclude)))
-            run(Tidier(options.directory, dirs_to_exclude))
+             print('[+] A total of {} will be excluded in the clean up'.format(len(dirs_to_exclude)))
+             run(Tidier(options.directory, dirs_to_exclude))
         elif options.recursive_tidy and not options.excluded_dirs:
-            run(Tidier(options.directory), True)
+             run(Tidier(options.directory), True)
         elif options.recursive_tidy and options.excluded_dirs:
-            run(Tidier(options.directory, dirs_to_exclude), True)
+             run(Tidier(options.directory, dirs_to_exclude), True)
     else:
         parser.usage = '''
 
