@@ -44,7 +44,7 @@ class Tidier(object):
     params path        : The path containing the files
     params exclude_dirs: The path to directories to exclude.from tidying
     """
-    def __init__(self, path, excluded_dirs):
+    def __init__(self, path, excluded_dirs=[]):
 
         if not exists(path):
             return '[-] Directory does not exists !!!'
